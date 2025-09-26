@@ -26,26 +26,59 @@
     .barber-stripes {
       background: repeating-linear-gradient(
         45deg,
-        rgba(225,29,72,0.2) 0 20px,   /* faint red */
-        rgba(255,255,255,0.15) 20px 40px, /* faint white */
-        rgba(37,99,235,0.2) 40px 60px /* faint blue */
+        rgba(225,29,72,0.15) 0 20px,   /* faint red */
+        rgba(255,255,255,0.1) 20px 40px, /* faint white */
+        rgba(37,99,235,0.15) 40px 60px /* faint blue */
       );
     }
     .stripe-divider { height: 10px; width: 100%; }
     .side-stripe {
       position: fixed; top: 0; bottom: 0;
       width: 12px; z-index: 40;
-      opacity: 0.4; /* much less bright */
+      opacity: 0.25;
     }
     .side-left { left: 0; }
     .side-right { right: 0; }
 
-    /* Hover & animations */
-    .wave-card { transition: transform 0.3s, box-shadow 0.3s; }
-    .wave-card:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 8px 20px rgba(250,204,21,0.4); }
-    .testimonial:hover { transform: scale(1.05); transition: transform 0.3s ease; }
+    /* Card hover glow + wave animation */
+    .wave-card {
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: float 6s ease-in-out infinite;
+    }
+    .wave-card:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(250,204,21,0.4);
+    }
+    .testimonial {
+      transition: transform 0.3s ease;
+      animation: float 7s ease-in-out infinite;
+    }
+    .testimonial:hover { transform: scale(1.05); }
 
-    #backToTop { position:fixed; bottom:25px; right:25px; background:#991b1b; color:white; border-radius:50%; padding:14px; display:none; cursor:pointer; z-index:50; transition:transform 0.3s, background 0.3s; }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Hidden legend for services */
+    .service-card { position: relative; overflow: hidden; }
+    .service-legend {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.8);
+      color: #facc15;
+      display: flex; justify-content: center; align-items: center;
+      font-size: 1.25rem; font-weight: bold;
+      opacity: 0; transition: opacity 0.4s ease;
+    }
+    .service-card:hover .service-legend { opacity: 1; }
+
+    #backToTop {
+      position:fixed; bottom:25px; right:25px;
+      background:#991b1b; color:white; border-radius:50%;
+      padding:14px; display:none; cursor:pointer; z-index:50;
+      transition:transform 0.3s, background 0.3s;
+    }
     #backToTop:hover { transform:scale(1.25); background:#facc15; color:black; }
   </style>
 </head>
@@ -80,24 +113,24 @@
 
   <div class="stripe-divider barber-stripes"></div>
 
-  <!-- Services (kept + restyled) -->
+  <!-- Services -->
   <section id="services" class="py-20 bg-gray-900 text-gray-200">
     <h2 class="text-4xl font-bold text-center mb-12 text-yellow-500">Our Services</h2>
     <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto px-6">
-      <div class="bg-gray-800 border border-yellow-500 rounded-lg shadow-lg p-6 text-center wave-card" data-aos="fade-up" data-aos-delay="100">
+      <div class="bg-gray-800 border border-yellow-500 rounded-lg shadow-lg p-6 text-center wave-card service-card" data-aos="fade-up" data-aos-delay="100">
         <img src="pictures/services_1_fade_cut.jpg" class="w-full h-48 object-cover rounded mb-4">
         <h3 class="text-2xl font-bold text-yellow-500">Fade Cut</h3>
-        <p class="mt-2">Classic & modern fades with sharp detail.</p>
+        <div class="service-legend">Sharp & Stylish</div>
       </div>
-      <div class="bg-gray-800 border border-yellow-500 rounded-lg shadow-lg p-6 text-center wave-card" data-aos="fade-up" data-aos-delay="200">
+      <div class="bg-gray-800 border border-yellow-500 rounded-lg shadow-lg p-6 text-center wave-card service-card" data-aos="fade-up" data-aos-delay="200">
         <img src="pictures/services_2_dread_locks.jpg" class="w-full h-48 object-cover rounded mb-4">
         <h3 class="text-2xl font-bold text-yellow-500">Dread Locks</h3>
-        <p class="mt-2">Stylish locks crafted by expert barbers.</p>
+        <div class="service-legend">Bold & Unique</div>
       </div>
-      <div class="bg-gray-800 border border-yellow-500 rounded-lg shadow-lg p-6 text-center wave-card" data-aos="fade-up" data-aos-delay="300">
+      <div class="bg-gray-800 border border-yellow-500 rounded-lg shadow-lg p-6 text-center wave-card service-card" data-aos="fade-up" data-aos-delay="300">
         <img src="pictures/services_3_buzzcut.jpg" class="w-full h-48 object-cover rounded mb-4">
         <h3 class="text-2xl font-bold text-yellow-500">Buzz Cut</h3>
-        <p class="mt-2">Clean & professional low maintenance look.</p>
+        <div class="service-legend">Clean & Fresh</div>
       </div>
     </div>
   </section>
@@ -142,7 +175,7 @@
       </div>
       <div>
         <p class="text-lg leading-relaxed mb-6">At Sharp Style Barbershop, we mix tradition with modern trends. Our talented barbers offer premium haircuts, beard trims, and shaves, ensuring you leave looking sharp and confident.</p>
-        <img src="pictures/about_us_1.jpg" class="rounded-2xl shadow-lg transform hover:scale-105 transition duration-500" alt="">
+        <img src="pictures/about_us_interior.jpg" class="rounded-2xl shadow-lg transform hover:scale-105 transition duration-500" alt="Interior">
       </div>
     </div>
   </section>
@@ -150,13 +183,13 @@
   <div class="stripe-divider barber-stripes"></div>
 
   <!-- Gallery -->
-  <section id="gallery" class="py-20 px-6 max-w-6xl mx-auto text-center" data-aos="fade-up">
-    <h2 class="text-4xl font-bold mb-10 text-red-700">Before & After</h2>
+  <section id="gallery" class="py-20 px-6 max-w-6xl mx-auto text-center bg-black text-white" data-aos="fade-up">
+    <h2 class="text-4xl font-bold mb-10 text-yellow-500">Before & After</h2>
     <div class="grid md:grid-cols-4 gap-6">
-      <img src="pictures/before_after_shot_1.jpg" class="rounded-2xl shadow-lg wave-card" alt="">
-      <img src="pictures/before_after_shot_2.jpg" class="rounded-2xl shadow-lg wave-card" alt="">
-      <img src="pictures/before_after_shot_3.jpg" class="rounded-2xl shadow-lg wave-card" alt="">
-      <img src="pictures/before_after_shot_4.jpg" class="rounded-2xl shadow-lg wave-card" alt="">
+      <div class="bg-gray-800 border border-yellow-500 p-3 rounded-lg shadow-lg wave-card"><img src="pictures/before_after_shot_1.jpg" class="rounded-xl" alt=""></div>
+      <div class="bg-gray-800 border border-yellow-500 p-3 rounded-lg shadow-lg wave-card"><img src="pictures/before_after_shot_2.jpg" class="rounded-xl" alt=""></div>
+      <div class="bg-gray-800 border border-yellow-500 p-3 rounded-lg shadow-lg wave-card"><img src="pictures/before_after_shot_3.jpg" class="rounded-xl" alt=""></div>
+      <div class="bg-gray-800 border border-yellow-500 p-3 rounded-lg shadow-lg wave-card"><img src="pictures/before_after_shot_4.jpg" class="rounded-xl" alt=""></div>
     </div>
   </section>
 
@@ -188,13 +221,13 @@
   <script>
     AOS.init({ duration: 1000, once: false, mirror: true });
 
-    // Testimonials Slider
+    // Testimonials Slider faster
     const slider = document.getElementById("testimonialSlider");
     let index = 0;
     setInterval(() => {
       index = (index + 1) % 3;
       slider.style.transform = `translateX(-${index * 100}%)`;
-    }, 3000);
+    }, 2500);
 
     // Back to Top
     const backToTop = document.getElementById("backToTop");
