@@ -40,17 +40,52 @@
   </header>
 
   <!-- Hero -->
-  <section id="hero" class="h-screen flex flex-col justify-center items-center text-center px-4 hero-bg relative text-white">
-    <div class="particles">
-      <div class="particle" style="left:10%; animation-duration:12s;"></div>
-      <div class="particle" style="left:40%; animation-duration:15s;"></div>
-      <div class="particle" style="left:70%; animation-duration:18s;"></div>
-      <div class="particle" style="left:90%; animation-duration:20s;"></div>
+  <section id="hero" class="h-screen bg-[url('pictures/Hero_picture_barber.jpg')] bg-cover bg-center flex items-center justify-center text-center relative">
+  <div class="bg-black bg-opacity-60 p-10 rounded-lg text-white max-w-2xl">
+    <h1 class="text-5xl md:text-6xl font-bold mb-4 text-yellow-500 tracking-wide uppercase">Sharp Style Barbershop</h1>
+    <p class="text-lg mb-6 text-gray-200 italic">"Where tradition meets modern style"</p>
+    <a href="#contact" class="bg-yellow-500 text-black px-8 py-4 rounded-lg font-semibold hover:bg-yellow-400 transition">Book Now</a>
+  </div>
+</section>
+
+<section id="services" class="py-20 bg-gray-100">
+  <h2 class="text-4xl font-bold text-center mb-12 text-red-700">Our Services</h2>
+  <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto px-6">
+    <div class="bg-white border-2 border-yellow-500 rounded-lg shadow-lg p-6 text-center hover:shadow-2xl transition">
+      <img src="pictures/services_1_fade_cut.jpg" class="w-full h-48 object-cover rounded mb-4">
+      <h3 class="text-2xl font-bold text-red-700">Fade Cut</h3>
+      <p class="text-gray-600 mt-2">Classic & modern fades with sharp detail.</p>
     </div>
-    <h1 class="text-5xl sm:text-6xl font-bold mb-4 relative z-10">Sharp Style Barbershop</h1>
-    <p class="text-lg sm:text-2xl text-yellow-300 mb-6 relative z-10"><span id="typed"></span></p>
-    <a href="#contact" class="bg-yellow-500 text-black px-8 py-4 rounded-lg font-semibold shadow-lg hover:bg-yellow-400 relative z-10">Book an Appointment</a>
-  </section>
+    <div class="bg-white border-2 border-yellow-500 rounded-lg shadow-lg p-6 text-center hover:shadow-2xl transition">
+      <img src="pictures/services_2_dread_locks.jpg" class="w-full h-48 object-cover rounded mb-4">
+      <h3 class="text-2xl font-bold text-red-700">Dread Locks</h3>
+      <p class="text-gray-600 mt-2">Stylish locks crafted by expert barbers.</p>
+    </div>
+    <div class="bg-white border-2 border-yellow-500 rounded-lg shadow-lg p-6 text-center hover:shadow-2xl transition">
+      <img src="pictures/services_3_buzzcut.jpg" class="w-full h-48 object-cover rounded mb-4">
+      <h3 class="text-2xl font-bold text-red-700">Buzz Cut</h3>
+      <p class="text-gray-600 mt-2">Clean & professional low maintenance look.</p>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" class="py-20 bg-black text-white">
+  <h2 class="text-4xl font-bold text-center mb-12 text-yellow-500">What Our Clients Say</h2>
+  <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
+    <div class="bg-gray-800 border border-yellow-500 p-6 rounded-lg shadow-md">
+      <p class="italic text-gray-300">"Best fade in town. I always walk out looking sharp!"</p>
+      <h3 class="mt-4 text-yellow-500 font-bold">— James R.</h3>
+    </div>
+    <div class="bg-gray-800 border border-yellow-500 p-6 rounded-lg shadow-md">
+      <p class="italic text-gray-300">"They know their craft. My beard has never looked this good."</p>
+      <h3 class="mt-4 text-yellow-500 font-bold">— Carlos M.</h3>
+    </div>
+    <div class="bg-gray-800 border border-yellow-500 p-6 rounded-lg shadow-md">
+      <p class="italic text-gray-300">"Feels like a community. Great cuts, great people."</p>
+      <h3 class="mt-4 text-yellow-500 font-bold">— Mike D.</h3>
+    </div>
+  </div>
+</section>
 
   <!-- About -->
   <section id="about" class="py-20 max-w-6xl mx-auto px-6" data-aos="fade-up">
