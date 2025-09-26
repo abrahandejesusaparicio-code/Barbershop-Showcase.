@@ -1,0 +1,83 @@
+export default function Barbershop() {
+  return (
+    <div className="bg-gray-50 text-gray-900 font-sans">
+      {/* Hero Section */}
+      <section className="relative bg-[url('https://images.unsplash.com/photo-1585747860715-4c1c88f2c294?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center h-screen flex items-center justify-center">
+        <div className="bg-black bg-opacity-50 p-10 rounded-xl text-center text-white">
+          <h1 className="text-5xl font-bold mb-4">Sharp Style Barbershop</h1>
+          <p className="text-lg mb-6">Classic Cuts • Modern Styles • Confidence Redefined</p>
+          <a href="#contact" className="bg-yellow-500 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-400">
+            Book an Appointment
+          </a>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section id="services" className="py-20 px-6 max-w-6xl mx-auto text-center">
+        <h2 className="text-4xl font-bold mb-10">Our Services</h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          {[
+            { title: "Haircuts", desc: "Classic, modern, fades, and more." },
+            { title: "Beard Trimming", desc: "Keep your beard sharp and stylish." },
+            { title: "Shaves", desc: "Hot towel shaves for the ultimate refresh." }
+          ].map((service, i) => (
+            <div key={i} className="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition">
+              <h3 className="text-2xl font-semibold mb-2">{service.title}</h3>
+              <p className="text-gray-600">{service.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Barbers */}
+      <section id="barbers" className="py-20 bg-gray-100 px-6 max-w-6xl mx-auto text-center">
+        <h2 className="text-4xl font-bold mb-10">Meet Our Barbers</h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          {["John", "Carlos", "Mike"].map((barber, i) => (
+            <div key={i} className="bg-white rounded-2xl shadow-md overflow-hidden">
+              <img src={`https://randomuser.me/api/portraits/men/${30 + i}.jpg`} alt={barber} className="w-full h-64 object-cover" />
+              <div className="p-4">
+                <h3 className="text-2xl font-semibold">{barber}</h3>
+                <p className="text-gray-600">Master Barber</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section id="pricing" className="py-20 px-6 max-w-6xl mx-auto text-center">
+        <h2 className="text-4xl font-bold mb-10">Pricing</h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          {[
+            { service: "Men's Haircut", price: "$25" },
+            { service: "Beard Trim", price: "$15" },
+            { service: "Hot Towel Shave", price: "$20" }
+          ].map((item, i) => (
+            <div key={i} className="p-6 bg-white rounded-2xl shadow-md hover:shadow-xl transition">
+              <h3 className="text-2xl font-semibold">{item.service}</h3>
+              <p className="text-yellow-600 font-bold text-xl">{item.price}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="py-20 bg-gray-900 text-white text-center px-6">
+        <h2 className="text-4xl font-bold mb-6">Book Your Spot</h2>
+        <p className="mb-6">123 Main Street, City • (555) 123-4567</p>
+        <form className="max-w-lg mx-auto space-y-4">
+          <input type="text" placeholder="Your Name" className="w-full p-3 rounded-lg text-black" />
+          <input type="email" placeholder="Your Email" className="w-full p-3 rounded-lg text-black" />
+          <textarea placeholder="Your Message" className="w-full p-3 rounded-lg text-black" rows="4"></textarea>
+          <button className="bg-yellow-500 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-400 w-full">Send</button>
+        </form>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-6 bg-black text-gray-400 text-center">
+        © 2025 Sharp Style Barbershop. All Rights Reserved.
+      </footer>
+    </div>
+  );
+}
