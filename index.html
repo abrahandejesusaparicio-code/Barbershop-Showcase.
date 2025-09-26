@@ -26,17 +26,13 @@
     .barber-stripes {
       background: repeating-linear-gradient(
         45deg,
-        rgba(225,29,72,0.15) 0 20px,   /* faint red */
-        rgba(255,255,255,0.1) 20px 40px, /* faint white */
-        rgba(37,99,235,0.15) 40px 60px /* faint blue */
+        rgba(225,29,72,0.15) 0 20px,
+        rgba(255,255,255,0.1) 20px 40px,
+        rgba(37,99,235,0.15) 40px 60px
       );
     }
     .stripe-divider { height: 10px; width: 100%; }
-    .side-stripe {
-      position: fixed; top: 0; bottom: 0;
-      width: 12px; z-index: 40;
-      opacity: 0.25;
-    }
+    .side-stripe { position: fixed; top: 0; bottom: 0; width: 12px; z-index: 40; opacity: 0.25; }
     .side-left { left: 0; }
     .side-right { right: 0; }
 
@@ -49,10 +45,7 @@
       transform: translateY(-5px) scale(1.05);
       box-shadow: 0 10px 25px rgba(250,204,21,0.4);
     }
-    .testimonial {
-      transition: transform 0.3s ease;
-      animation: float 7s ease-in-out infinite;
-    }
+    .testimonial { transition: transform 0.3s ease; animation: float 7s ease-in-out infinite; }
     .testimonial:hover { transform: scale(1.05); }
 
     @keyframes float {
@@ -65,13 +58,34 @@
     .service-card { position: relative; overflow: hidden; }
     .service-legend {
       position: absolute; inset: 0;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.85);
       color: #facc15;
       display: flex; justify-content: center; align-items: center;
-      font-size: 1.25rem; font-weight: bold;
-      opacity: 0; transition: opacity 0.4s ease;
+      font-size: 1.1rem; padding: 1rem;
+      opacity: 0; transition: opacity 0.5s ease;
+      text-align: center; line-height: 1.5;
     }
     .service-card:hover .service-legend { opacity: 1; }
+
+    /* Wave backgrounds */
+    .wave-bg {
+      position: relative;
+      overflow: hidden;
+    }
+    .wave-bg::before {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: -1px;
+      height: 120px;
+      background: url('https://svgshare.com/i/13fq.svg') repeat-x;
+      background-size: 1000px 120px;
+      animation: waveMove 10s linear infinite;
+      opacity: 0.3;
+    }
+    @keyframes waveMove {
+      0% { background-position-x: 0; }
+      100% { background-position-x: 1000px; }
+    }
 
     #backToTop {
       position:fixed; bottom:25px; right:25px;
@@ -106,7 +120,7 @@
   <section id="hero" class="h-screen bg-[url('pictures/Hero_picture_barber.jpg')] bg-cover bg-center flex items-center justify-center text-center relative">
     <div class="bg-black bg-opacity-60 p-10 rounded-lg text-white max-w-2xl">
       <h1 class="text-5xl md:text-6xl font-bold mb-4 text-yellow-500 tracking-wide uppercase">Sharp Style Barbershop</h1>
-      <p class="text-lg mb-6 text-gray-200 italic">"Where tradition meets modern style"</p>
+      <p id="typed-text" class="text-lg mb-6 text-gray-200 italic"></p>
       <a href="#contact" class="bg-yellow-500 text-black px-8 py-4 rounded-lg font-semibold hover:bg-yellow-400 transition">Book Now</a>
     </div>
   </section>
@@ -114,23 +128,23 @@
   <div class="stripe-divider barber-stripes"></div>
 
   <!-- Services -->
-  <section id="services" class="py-20 bg-gray-900 text-gray-200">
+  <section id="services" class="py-20 bg-gray-900 text-gray-200 wave-bg">
     <h2 class="text-4xl font-bold text-center mb-12 text-yellow-500">Our Services</h2>
     <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto px-6">
       <div class="bg-gray-800 border border-yellow-500 rounded-lg shadow-lg p-6 text-center wave-card service-card" data-aos="fade-up" data-aos-delay="100">
         <img src="pictures/services_1_fade_cut.jpg" class="w-full h-48 object-cover rounded mb-4">
         <h3 class="text-2xl font-bold text-yellow-500">Fade Cut</h3>
-        <div class="service-legend">Sharp & Stylish</div>
+        <div class="service-legend">Our signature fade blends precision and style, giving you a sharp and modern look that fits every occasion.</div>
       </div>
       <div class="bg-gray-800 border border-yellow-500 rounded-lg shadow-lg p-6 text-center wave-card service-card" data-aos="fade-up" data-aos-delay="200">
         <img src="pictures/services_2_dread_locks.jpg" class="w-full h-48 object-cover rounded mb-4">
         <h3 class="text-2xl font-bold text-yellow-500">Dread Locks</h3>
-        <div class="service-legend">Bold & Unique</div>
+        <div class="service-legend">Expertly twisted and maintained dreadlocks that show personality, creativity, and culture in every strand.</div>
       </div>
       <div class="bg-gray-800 border border-yellow-500 rounded-lg shadow-lg p-6 text-center wave-card service-card" data-aos="fade-up" data-aos-delay="300">
         <img src="pictures/services_3_buzzcut.jpg" class="w-full h-48 object-cover rounded mb-4">
         <h3 class="text-2xl font-bold text-yellow-500">Buzz Cut</h3>
-        <div class="service-legend">Clean & Fresh</div>
+        <div class="service-legend">Low-maintenance, clean, and professional. The perfect haircut for a confident everyday style.</div>
       </div>
     </div>
   </section>
@@ -169,13 +183,13 @@
   <!-- About -->
   <section id="about" class="py-20 bg-gray-900 text-gray-200" data-aos="fade-up">
     <h2 class="text-4xl font-bold mb-10 text-yellow-500 text-center">About Us</h2>
-    <div class="grid md:grid-cols-2 gap-8 items-center max-w-6xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-8 items-center justify-center max-w-6xl mx-auto px-6">
       <div class="overflow-hidden rounded-2xl shadow-lg">
-        <img src="pictures/about_us_barbershop.jpg" class="rounded-2xl transform hover:scale-105 transition duration-500" alt="">
+        <img src="pictures/about_us_barbershop.jpg" class="rounded-2xl transform hover:scale-105 transition duration-500 mx-auto" alt="">
       </div>
-      <div>
+      <div class="text-center md:text-left">
         <p class="text-lg leading-relaxed mb-6">At Sharp Style Barbershop, we mix tradition with modern trends. Our talented barbers offer premium haircuts, beard trims, and shaves, ensuring you leave looking sharp and confident.</p>
-        <img src="pictures/about_us_interior.jpg" class="rounded-2xl shadow-lg transform hover:scale-105 transition duration-500" alt="Interior">
+        <img src="pictures/about_us_interior.jpg" class="rounded-2xl shadow-lg transform hover:scale-105 transition duration-500 mx-auto" alt="Interior">
       </div>
     </div>
   </section>
@@ -183,7 +197,7 @@
   <div class="stripe-divider barber-stripes"></div>
 
   <!-- Gallery -->
-  <section id="gallery" class="py-20 px-6 max-w-6xl mx-auto text-center bg-black text-white" data-aos="fade-up">
+  <section id="gallery" class="py-20 px-6 max-w-6xl mx-auto text-center bg-black text-white wave-bg" data-aos="fade-up">
     <h2 class="text-4xl font-bold mb-10 text-yellow-500">Before & After</h2>
     <div class="grid md:grid-cols-4 gap-6">
       <div class="bg-gray-800 border border-yellow-500 p-3 rounded-lg shadow-lg wave-card"><img src="pictures/before_after_shot_1.jpg" class="rounded-xl" alt=""></div>
@@ -220,6 +234,12 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000, once: false, mirror: true });
+
+    // Typed.js in Hero
+    new Typed("#typed-text", {
+      strings: ["Where tradition meets modern style", "Classic Cuts • Modern Styles", "Confidence Redefined"],
+      typeSpeed: 50, backSpeed: 25, loop: true
+    });
 
     // Testimonials Slider faster
     const slider = document.getElementById("testimonialSlider");
