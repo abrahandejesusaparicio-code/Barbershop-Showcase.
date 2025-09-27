@@ -259,19 +259,85 @@
     </form>
   </section>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="py-8 bg-black text-gray-200 text-center space-y-4">
-    <img src="pictures/barbershop_logo.jpg" alt="Logo" class="mx-auto w-16 mb-3" />
-    <div class="flex justify-center gap-6 text-xl">
-      <a href="#" class="hover:text-yellow-400">📸</a>
-      <a href="#" class="hover:text-yellow-400">👍</a>
-      <a href="#" class="hover:text-yellow-400">🎥</a>
+  <!-- ================= FOOTER (Professional) ================= -->
+<footer class="bg-black text-gray-200 border-t border-white/10">
+  <div class="max-w-7xl mx-auto px-6 py-16 grid gap-10 md:grid-cols-3 lg:grid-cols-5">
+    <!-- Brand -->
+    <div class="lg:col-span-1">
+      <div class="flex items-center gap-3 mb-4">
+        <img src="pictures/barbershop_logo.jpg" alt="Sharp Style Barbershop" class="w-12 h-12 rounded-full object-cover">
+        <span class="text-lg font-semibold tracking-wide">Sharp Style</span>
+      </div>
+      <p class="text-sm text-gray-400 leading-6">
+        Classic craftsmanship, modern style. Premium cuts, beard trims, and shaves in a relaxed atmosphere.
+      </p>
+      <div class="flex gap-4 mt-5 text-xl">
+        <a href="#" aria-label="Instagram" class="hover:text-yellow-400 transition-colors">📸</a>
+        <a href="#" aria-label="Facebook" class="hover:text-yellow-400 transition-colors">👍</a>
+        <a href="#" aria-label="TikTok" class="hover:text-yellow-400 transition-colors">🎥</a>
+      </div>
     </div>
-    <div class="max-w-md mx-auto">
-      <iframe class="w-full h-48 rounded-xl border border-white/10" src="https://maps.google.com/maps?q=New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+
+    <!-- Quick Links -->
+    <div>
+      <h4 class="text-yellow-400 font-semibold mb-4">Quick Links</h4>
+      <ul class="space-y-2 text-sm">
+        <li><a href="#services" class="hover:text-yellow-400 transition-colors">Services</a></li>
+        <li><a href="#prices" class="hover:text-yellow-400 transition-colors">Prices</a></li>
+        <li><a href="#about" class="hover:text-yellow-400 transition-colors">Why Choose Us</a></li>
+        <li><a href="#gallery" class="hover:text-yellow-400 transition-colors">Before & After</a></li>
+        <li><a href="#testimonials" class="hover:text-yellow-400 transition-colors">Testimonials</a></li>
+        <li><a href="#contact" class="hover:text-yellow-400 transition-colors">Book / Contact</a></li>
+      </ul>
     </div>
-    <p>© 2025 Sharp Style Barbershop. All Rights Reserved.</p>
-  </footer>
+
+    <!-- Hours -->
+    <div>
+      <h4 class="text-yellow-400 font-semibold mb-4">Hours</h4>
+      <ul class="space-y-2 text-sm text-gray-300">
+        <li class="flex justify-between"><span>Mon–Fri</span><span>9:00 – 19:00</span></li>
+        <li class="flex justify-between"><span>Saturday</span><span>9:00 – 17:00</span></li>
+        <li class="flex justify-between"><span>Sunday</span><span class="text-gray-400">Closed</span></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <h4 class="text-yellow-400 font-semibold mb-4">Contact</h4>
+      <ul class="space-y-3 text-sm">
+        <li><span class="text-gray-400">Address:</span> 123 Main Street, City</li>
+        <li><span class="text-gray-400">Phone:</span> (555) 123-4567</li>
+        <li><span class="text-gray-400">Email:</span> hello@sharpstyle.barber</li>
+      </ul>
+      <a href="#contact" class="inline-block mt-4 bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">
+        Book Now
+      </a>
+    </div>
+
+    <!-- Map -->
+    <div class="lg:col-span-1 md:col-span-3 lg:col-span-2">
+      <h4 class="text-yellow-400 font-semibold mb-4">Find Us</h4>
+      <iframe
+        class="w-full h-48 md:h-full rounded-xl border border-white/10"
+        src="https://maps.google.com/maps?q=New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Map location"></iframe>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 h-14 flex flex-col sm:flex-row items-center justify-between text-sm text-gray-400">
+      <p>© <span id="year"></span> Sharp Style Barbershop. All Rights Reserved.</p>
+      <div class="flex gap-4 mt-2 sm:mt-0">
+        <a href="#" class="hover:text-yellow-400 transition-colors">Privacy</a>
+        <a href="#" class="hover:text-yellow-400 transition-colors">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
 
   <!-- Floating CTA -->
   <a href="#contact" id="bookNowBtn" class="btn-shine">Book Now</a>
@@ -304,6 +370,10 @@
       backToTop.style.display = window.scrollY > 300 ? "block" : "none";
     });
     backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-  </script>
+  </script
+  <script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
