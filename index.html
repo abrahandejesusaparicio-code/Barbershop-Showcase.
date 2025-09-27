@@ -8,7 +8,7 @@
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- AOS + Icons -->
+  <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
@@ -16,68 +16,41 @@
     :root{
       --gold:#facc15;
       --slate:#0b0f14;
-      --ink:#0f172a;
-      --brand-red:#e11d48;
-      --brand-blue:#2563eb;
     }
     html{scroll-behavior:smooth}
     body{font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial}
 
-    /* Hero gradient */
-    .hero-gradient{
-      background: radial-gradient(1200px 600px at 20% 10%, rgba(250,204,21,.12), transparent 60%),
-                  radial-gradient(900px 600px at 85% 20%, rgba(37,99,235,.15), transparent 55%),
-                  radial-gradient(700px 500px at 50% 90%, rgba(225,29,72,.12), transparent 60%),
-                  linear-gradient(180deg, #0a0f15 0%, #0b1220 100%);
-      position: relative;
-      overflow: hidden;
-      background-attachment: fixed;
-    }
-
-    /* Nav links effect */
-    .nav-link {
-      position: relative;
-      background-image: linear-gradient(to right, var(--gold), var(--brand-red), var(--brand-blue));
-      background-size: 0% 2px;
-      background-position: 0 100%;
-      background-repeat: no-repeat;
-      transition: background-size .3s ease, color .3s ease;
-    }
-    .nav-link:hover {
-      background-size: 100% 2px;
-      color: transparent;
-      background-clip: text;
-      -webkit-background-clip: text;
-    }
-
-    /* Floating animation */
-    .float-slow{animation:float 12s ease-in-out infinite}
-    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
-
-    /* Card hover */
+    /* --- Reusable effects --- */
     .card-hover{transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;}
     .card-hover:hover{transform: translateY(-6px) scale(1.03);box-shadow: 0 12px 28px rgba(250,204,21,.2);border-color: var(--gold);}
 
-    /* Button shine */
     .btn-shine{position:relative; overflow:hidden;}
     .btn-shine::before{
       content:""; position:absolute; inset:-150% -50%;
       transform: translateX(-120%) rotate(20deg);
       background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.35) 50%, transparent 100%);
-      transition: transform .6s ease;
-      will-change: transform;
+      transition: transform .6s ease; will-change: transform;
     }
     .btn-shine:hover::before{transform: translateX(120%) rotate(20deg);}
 
-    /* Overlay effect */
-    .overlay{position:absolute; inset:0;display:flex; align-items:center; justify-content:center;background:rgba(0,0,0,.55);opacity:0; transition:opacity .35s ease;color:var(--gold); font-weight:600; font-size:1.25rem;}
-    .img-wrap:hover .overlay{opacity:1}
+    .img-wrap{position:relative;}
+    .img-wrap .overlay-text{
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+      background:rgba(0,0,0,.55); opacity:0; transition:opacity .35s ease;
+      color:var(--gold); font-weight:600; font-size:1.1rem;
+    }
+    .img-wrap:hover .overlay-text{opacity:1}
 
     /* Back to top */
-    #backToTop{position:fixed; right:22px; bottom:22px; z-index:50; display:none;background:var(--gold); color:black; border-radius:9999px; padding:12px 14px; box-shadow:0 6px 16px rgba(0,0,0,.25);transition:transform .25s ease, background .25s ease;}
-    #backToTop:hover{transform:translateY(-2px) scale(1.05); background:#fde047}
+    #backToTop{
+      position:fixed; right:22px; bottom:22px; z-index:50; display:none;
+      background:#111827; color:white; border-radius:9999px; padding:12px 14px;
+      border:1px solid rgba(255,255,255,.1);
+      transition:transform .25s ease, background .25s ease;
+    }
+    #backToTop:hover{transform:translateY(-2px) scale(1.05); background:#1f2937}
 
-    /* Floating Book CTA */
+    /* Floating CTA */
     #bookNowBtn{
       position: fixed; bottom: 80px; right: 20px; z-index:50;
       background: var(--gold); color:black;
@@ -87,9 +60,98 @@
     }
     #bookNowBtn:hover{transform:scale(1.05); background:#fde047;}
 
-    /* Price table */
-    #prices table tr:hover{background:rgba(255,255,255,.05)}
-    #prices td, #prices th{padding:14px 18px;}
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-gray-100 selection:bg-yellow-200 selection:text-black">
+
+  <!-- ================= NAV ================= -->
+  <header class="fixed top-0 inset-x-0 z-40 bg-black/60 backdrop-blur border-b border-white/10">
+    <nav class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-3 hover:opacity-90 transition-opacity">
+        <img src="pictures/barbershop_logo.jpg" alt="Sharp Style Barbershop" class="w-10 h-10 rounded-full object-cover">
+        <span class="font-semibold tracking-wide">Sharp Style</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-8 font-medium">
+        <li><a class="hover:text-yellow-400 transition-colors" href="#services">Services</a></li>
+        <li><a class="hover:text-yellow-400 transition-colors" href="#prices">Prices</a></li>
+        <li><a class="hover:text-yellow-400 transition-colors" href="#about">About</a></li>
+        <li><a class="hover:text-yellow-400 transition-colors" href="#gallery">Before & After</a></li>
+        <li><a class="hover:text-yellow-400 transition-colors" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ================= HERO (video) ================= -->
+  <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden text-center pt-16">
+    <!-- Background Video (put barbershop_hero.mp4 next to this HTML file) -->
+    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover -z-10">
+      <source src="barbershop_hero.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-black/55 -z-0"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 px-6 max-w-3xl">
+      <h1 class="text-5xl sm:text-6xl font-extrabold mb-6">Sharp Cuts. <span class="text-yellow-400">Modern Style.</span></h1>
+      <p class="mb-8 text-lg opacity-90">Classic craftsmanship meets contemporary flair. Redefining barber culture since 2025.</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#contact" class="btn-shine bg-yellow-400 text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-300">Book Your Spot</a>
+        <a href="#services" class="btn-shine px-6 py-3 rounded-xl border border-white/20 hover:bg-white/10">See Services</a>
+      </div>
+      <div class="mt-6 text-sm opacity-80">Scroll to explore ↓</div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICES (Featured) ================= -->
+  <section id="services" class="py-20 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-center text-4xl font-extrabold mb-12 text-yellow-400" data-aos="fade-up">Our Services</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <article class="card-hover bg-gray-900/70 p-6 rounded-2xl border border-white/10" data-aos="zoom-in">
+          <img src="pictures/services_1_fade_cut.jpg" class="w-full h-48 object-cover rounded-xl mb-4" alt="Fade cut">
+          <h3 class="text-2xl font-bold text-yellow-400">Fade Cut ✂️</h3>
+          <p class="text-white/70 mt-2">Precision fades tailored to your face shape and style.</p>
+        </article>
+        <article class="card-hover bg-gray-900/70 p-6 rounded-2xl border border-white/10" data-aos="zoom-in" data-aos-delay="150">
+          <img src="pictures/services_2_dread_locks.jpg" class="w-full h-48 object-cover rounded-xl mb-4" alt="Dread locks">
+          <h3 class="text-2xl font-bold text-yellow-400">Dread Locks 💈</h3>
+          <p class="text-white/70 mt-2">Installations, maintenance, and styles that show personality.</p>
+        </article>
+        <article class="card-hover bg-gray-900/70 p-6 rounded-2xl border border-white/10" data-aos="zoom-in" data-aos-delay="300">
+          <img src="pictures/services_3_buzzcut.jpg" class="w-full h-48 object-cover rounded-xl mb-4" alt="Buzz cut">
+          <h3 class="text-2xl font-bold text-yellow-400">Buzz Cut 🪒</h3>
+          <p class="text-white/70 mt-2">Clean, low-maintenance look with sharp lines.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRICES ================= -->
+  <section id="prices" class="py-20 bg-slate-900">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-center text-4xl font-extrabold mb-12 text-yellow-400" data-aos="fade-up">Our Prices</h2>
+      <div class="overflow-x-auto" data-aos="fade-up">
+        <table class="w-full text-left border border-white/10 rounded-xl overflow-hidden">
+          <thead class="bg-gray-800/80 text-yellow-400">
+            <tr><th class="p-4">Service</th><th class="p-4">Price</th></tr>
+          </thead>
+          <tbody>
+            <tr class="border-t border-white/10"><td class="p-4">Fade Cut</td><td class="p-4">$25</td></tr>
+            <tr class="border-t border-white/10"><td class="p-4">Buzz Cut</td><td class="p-4">$20</td></tr>
+            <tr class="border-t border-white/10"><td class="p-4">Dread Locks</td><td class="p-4">$60</td></tr>
+            <tr class="border-t border-white/10"><td class="p-4">Beard Trim</td><td class="p-4">$15</td></tr>
+            <tr class="border-t border-white/10"><td class="p-4">Hot Towel Shave</td><td class="p-4">$30</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= WHY CHOOSE US ================= -->
   <section id="about" class="py-20 bg-slate-950">
     <div class="max-w-7xl mx-auto px-6 text-center">
@@ -97,15 +159,15 @@
       <div class="grid md:grid-cols-3 gap-8">
         <div class="p-6 bg-gray-900/70 rounded-2xl border border-white/10 card-hover" data-aos="fade-up">
           <h3 class="font-semibold text-xl mb-2 text-yellow-400">Skilled Barbers</h3>
-          <p class="text-white/70">Our team combines classic techniques with modern styles to give you the perfect look.</p>
+          <p class="text-white/70">Classic techniques + modern styles for the perfect look.</p>
         </div>
-        <div class="p-6 bg-gray-900/70 rounded-2xl border border-white/10 card-hover" data-aos="fade-up" data-aos-delay="200">
+        <div class="p-6 bg-gray-900/70 rounded-2xl border border-white/10 card-hover" data-aos="fade-up" data-aos-delay="150">
           <h3 class="font-semibold text-xl mb-2 text-yellow-400">Affordable Pricing</h3>
           <p class="text-white/70">Top-notch services that won’t break the bank.</p>
         </div>
-        <div class="p-6 bg-gray-900/70 rounded-2xl border border-white/10 card-hover" data-aos="fade-up" data-aos-delay="400">
+        <div class="p-6 bg-gray-900/70 rounded-2xl border border-white/10 card-hover" data-aos="fade-up" data-aos-delay="300">
           <h3 class="font-semibold text-xl mb-2 text-yellow-400">Great Atmosphere</h3>
-          <p class="text-white/70">Relax, chat, and enjoy the Sharp Style vibe while we take care of your look.</p>
+          <p class="text-white/70">Relax, chat, and enjoy the Sharp Style vibe.</p>
         </div>
       </div>
     </div>
@@ -118,52 +180,106 @@
         <h4 class="text-4xl font-extrabold">5,000+</h4>
         <p>Clients Served</p>
       </div>
-      <div class="transition-transform duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="200">
+      <div class="transition-transform duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="150">
         <h4 class="text-4xl font-extrabold">10+</h4>
-        <p>Years of Experience</p>
+        <p>Years Experience</p>
       </div>
-      <div class="transition-transform duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="400">
+      <div class="transition-transform duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="300">
         <h4 class="text-4xl font-extrabold">12</h4>
         <p>Expert Barbers</p>
       </div>
     </div>
   </section>
 
-    /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}
-    }
-  </style>
-</head>
-<body class="bg-slate-900 text-gray-100 selection:bg-yellow-200 selection:text-black">
+  <!-- ================= GALLERY ================= -->
+  <section id="gallery" class="bg-black py-20">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-4xl font-extrabold mb-6 text-yellow-400" data-aos="fade-up">Before & After</h2>
+      <p class="text-white/70 max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="100">Check out the transformations we create every day.</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="img-wrap rounded-2xl overflow-hidden border border-white/10 card-hover" data-aos="zoom-in">
+          <img src="pictures/before_after_shot_1.jpg" class="w-full h-64 object-cover" alt="Before & after 1">
+          <div class="overlay-text">Transformation</div>
+        </div>
+        <div class="img-wrap rounded-2xl overflow-hidden border border-white/10 card-hover" data-aos="zoom-in" data-aos-delay="150">
+          <img src="pictures/before_after_shot_2.jpg" class="w-full h-64 object-cover" alt="Before & after 2">
+          <div class="overlay-text">Before ➝ After</div>
+        </div>
+        <div class="img-wrap rounded-2xl overflow-hidden border border-white/10 card-hover" data-aos="zoom-in" data-aos-delay="300">
+          <img src="pictures/before_after_shot_3.jpg" class="w-full h-64 object-cover" alt="Before & after 3">
+          <div class="overlay-text">Fresh Look</div>
+        </div>
+        <div class="img-wrap rounded-2xl overflow-hidden border border-white/10 card-hover" data-aos="zoom-in" data-aos-delay="450">
+          <img src="pictures/before_after_shot_4.jpg" class="w-full h-64 object-cover" alt="Before & after 4">
+          <div class="overlay-text">Sharp Style</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- NAV -->
-  <header class="fixed top-0 inset-x-0 z-40 bg-black/60 backdrop-blur border-b border-white/10">
-    <nav class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-      <a href="#hero" class="flex items-center gap-3 nav-link">
-        <img src="pictures/barbershop_logo.jpg" alt="Sharp Style Barbershop" class="w-10 h-10 rounded-full object-cover">
-        <span class="font-semibold tracking-wide">Sharp Style</span>
-      </a>
-      <ul class="hidden md:flex items-center gap-8 font-medium">
-        <li><a class="nav-link" href="#services">Services</a></li>
-        <li><a class="nav-link" href="#prices">Prices</a></li>
-        <li><a class="nav-link" href="#about">About</a></li>
-        <li><a class="nav-link" href="#gallery">Before & After</a></li>
-        <li><a class="nav-link" href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- ================= TESTIMONIALS (slider) ================= -->
+  <section id="testimonials" class="py-20 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-center text-4xl font-extrabold mb-12" data-aos="fade-up">What Clients Say</h2>
+      <div class="relative overflow-hidden" data-aos="fade-up">
+        <div id="slider" class="flex transition-transform duration-700 will-change-transform">
+          <!-- Slide 1 -->
+          <div class="grid md:grid-cols-3 gap-6 w-full flex-shrink-0 px-1">
+            <blockquote class="card-hover bg-gray-900/70 p-6 rounded-2xl border border-white/10">★★★★★ <br>“Best fade in town!” <br><span class="font-semibold text-yellow-400">— James R.</span></blockquote>
+            <blockquote class="card-hover bg-gray-900/70 p-6 rounded-2xl border border-white/10">★★★★★ <br>“Feels like home. Friendly barbers.” <br><span class="font-semibold text-yellow-400">— Carlos M.</span></blockquote>
+            <blockquote class="card-hover bg-gray-900/70 p-6 rounded-2xl border border-white/10">★★★★★ <br>“My beard has never looked this good.” <br><span class="font-semibold text-yellow-400">— Mike D.</span></blockquote>
+          </div>
+          <!-- Slide 2 -->
+          <div class="grid md:grid-cols-3 gap-6 w-full flex-shrink-0 px-1">
+            <blockquote class="card-hover bg-gray-900/70 p-6 rounded-2xl border border-white/10">★★★★★ <br>“Great service, great vibe.” <br><span class="font-semibold text-yellow-400">— David P.</span></blockquote>
+            <blockquote class="card-hover bg-gray-900/70 p-6 rounded-2xl border border-white/10">★★★★★ <br>“Love the classic shave.” <br><span class="font-semibold text-yellow-400">— Samuel T.</span></blockquote>
+            <blockquote class="card-hover bg-gray-900/70 p-6 rounded-2xl border border-white/10">★★★★★ <br>“Best barbershop in town.” <br><span class="font-semibold text-yellow-400">— Andre L.</span></blockquote>
+          </div>
+        </div>
+        <!-- Dots -->
+        <div class="flex justify-center gap-3 mt-4" id="dots">
+          <span class="w-3 h-3 rounded-full bg-yellow-400 cursor-pointer" data-slide="0"></span>
+          <span class="w-3 h-3 rounded-full bg-gray-500 cursor-pointer" data-slide="1"></span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- (Sections remain the same, benefit from new hover/animation CSS) -->
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="py-20 bg-slate-900 text-center">
+    <h2 class="text-4xl font-extrabold mb-6 text-yellow-400">Book Your Spot</h2>
+    <p class="mb-6 text-gray-300">123 Main Street, City • (555) 123-4567</p>
+    <form class="max-w-lg mx-auto space-y-4" data-aos="zoom-in">
+      <input type="text" placeholder="Your Name" class="w-full p-3 rounded-lg text-black" />
+      <input type="email" placeholder="Your Email" class="w-full p-3 rounded-lg text-black" />
+      <textarea placeholder="Your Message" class="w-full p-3 rounded-lg text-black" rows="4"></textarea>
+      <button class="btn-shine bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 w-full">Send</button>
+    </form>
+  </section>
 
-  <!-- Back to Top -->
-  <button id="backToTop" aria-label="Back to Top">⬆</button>
+  <!-- ================= FOOTER ================= -->
+  <footer class="py-8 bg-black text-gray-200 text-center space-y-4">
+    <img src="pictures/barbershop_logo.jpg" alt="Logo" class="mx-auto w-16 mb-3" />
+    <div class="flex justify-center gap-6 text-xl">
+      <a href="#" class="hover:text-yellow-400">📸</a>
+      <a href="#" class="hover:text-yellow-400">👍</a>
+      <a href="#" class="hover:text-yellow-400">🎥</a>
+    </div>
+    <div class="max-w-md mx-auto">
+      <iframe class="w-full h-48 rounded-xl border border-white/10" src="https://maps.google.com/maps?q=New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+    </div>
+    <p>© 2025 Sharp Style Barbershop. All Rights Reserved.</p>
+  </footer>
 
   <!-- Floating CTA -->
   <a href="#contact" id="bookNowBtn" class="btn-shine">Book Now</a>
 
-  <!-- Scripts -->
+  <!-- Back to Top -->
+  <button id="backToTop" aria-label="Back to Top">⬆</button>
+
+  <!-- ================= SCRIPTS ================= -->
   <script>
+    // AOS
     AOS.init({ duration: 900, once: false, mirror: true });
 
     // Testimonials slider
@@ -171,13 +287,14 @@
     const dots = document.querySelectorAll("#dots span");
     let slideIndex = 0;
     function advanceSlider(idx = null){
-      if(idx!==null) slideIndex = idx;
+      if (idx !== null) slideIndex = idx;
       else slideIndex = (slideIndex + 1) % 2;
       slider.style.transform = `translateX(-${slideIndex * 100}%)`;
       dots.forEach((d,i)=>d.classList.toggle("bg-yellow-400", i===slideIndex));
+      dots.forEach((d,i)=>d.classList.toggle("bg-gray-500", i!==slideIndex));
     }
-    let sliderTimer = setInterval(advanceSlider, 3000);
-    dots.forEach((dot,i)=>dot.addEventListener("click",()=>advanceSlider(i)));
+    let sliderTimer = setInterval(advanceSlider, 3500);
+    dots.forEach((dot,i)=>dot.addEventListener("click",()=>{ advanceSlider(i); clearInterval(sliderTimer); }));
 
     // Back to Top
     const backToTop = document.getElementById("backToTop");
